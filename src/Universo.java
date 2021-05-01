@@ -1,8 +1,8 @@
 import processing.core.PApplet;
 
 public class Universo extends PApplet {
-    private Seguidor seguidor;
-    private Seguivel seguivel;
+   // private Seguidor seguidor;
+   // private Seguivel seguivel;
 
 
     float x, y;
@@ -21,13 +21,14 @@ public class Universo extends PApplet {
         rotate(radians(r));
 
         //Sol
-        fill(245, 192, 20);
-        ellipse(0, 0, 200, 200);
-        //ellipse(500, 500, 200, 200);
+        Sol sol = new Sol(this);
+        sol.desenha();
 
         //Planeta
-        fill(6, 109, 199);
-        ellipse(x, y, 50, 50);
+        Planeta planeta = new Planeta(x, y,this);
+        planeta.desenha();
+//        fill(6, 109, 199);
+//        ellipse(x, y, 50, 50);
        // pushMatrix();
             //Satelite
             translate(x, y);
