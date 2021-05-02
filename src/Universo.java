@@ -1,8 +1,8 @@
 import processing.core.PApplet;
 
 public class Universo extends PApplet {
-   // private Seguidor seguidor;
-   // private Seguivel seguivel;
+   private Seguidor seguidor;
+   private Seguivel seguivel;
 
 
     float x, y;
@@ -16,6 +16,15 @@ public class Universo extends PApplet {
 
     public void draw(){
         background(0);
+        if (seguidor != null) {
+            seguidor.desenha();
+            seguidor.move();
+            seguidor.segue();
+        }
+        if (seguivel != null) {
+            seguivel.desenha();
+            seguivel.move();
+        }
         //pushMatrix();
         translate(width/2, height/2);
         rotate(radians(r));
@@ -40,7 +49,21 @@ public class Universo extends PApplet {
        loop();
     }
 
+    public void mousePressed() {
+        Asteroide asteroide = new Asteroide( mouseX, mouseY, this);
 
+        asteroide.setaDX(random(-2,2));
+        asteroide.setaDY(random(-2,2));
+
+
+        if (mouseButton == LEFT) {
+                seguivel = asteroide;
+        }
+
+        if (seguivel != null && seguidor != null)
+            seguidor.estabeleceAlvo(seguivel);
+
+    }
 
     public static void main(String[] passedArgs) {
         String[] appletArgs = new String[] { "Universo" };
