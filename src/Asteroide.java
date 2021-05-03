@@ -1,6 +1,7 @@
 import processing.core.PApplet;
 
 public class Asteroide  implements Animavel, Seguidor, Seguivel{
+    private float tamanho;
     private float posx;
     private float posy;
     private float dx = 0;
@@ -8,7 +9,8 @@ public class Asteroide  implements Animavel, Seguidor, Seguivel{
     private PApplet processing;
     private Seguivel alvo = null;
 
-    public Asteroide( float posx, float posy, PApplet processing) {
+    public Asteroide( float tamanho, float posx, float posy, PApplet processing) {
+        this.tamanho = tamanho;
         this.posx = posx;
         this.posy = posy;
         this.processing = processing;
@@ -16,7 +18,7 @@ public class Asteroide  implements Animavel, Seguidor, Seguivel{
 
     public void desenha() {
         this.processing.fill(255);
-        this.processing.circle(posx, posy, 20);
+        this.processing.circle(posx, posy, tamanho);
     }
 
     //Interface Seguidor
@@ -43,22 +45,22 @@ public class Asteroide  implements Animavel, Seguidor, Seguivel{
         return new Posicao(this.posx, this.posy);
     }
 
-//
+
 //    public void setaTamanho(float tamanho) {
 //        this.tamanho = tamanho;
 //    }
-
-    public void setaX(float posx) {
-        this.posx = posx;
-    }
-
-    public void setaY(float posy) {
-        this.posy = posy;
-    }
-
-//    public float pegaTamanho() {
-//        return this.tamanho;
+//
+//    public void setaX(float posx) {
+//        this.posx = posx;
 //    }
+//
+//    public void setaY(float posy) {
+//        this.posy = posy;
+//    }
+
+    public float pegaTamanho() {
+        return this.tamanho;
+    }
 
     public float pegaX() {
         return this.posx;
@@ -87,14 +89,14 @@ public class Asteroide  implements Animavel, Seguidor, Seguivel{
     public void move() {
         this.posx = this.posx + this.dx;
         this.posy = this.posy + this.dy;
-        //ajusta();
+        ajusta();
     }
 
-//    public void ajusta() {
-//        if (posx >= lugar.width - tamanho/2) dx = -dx;
-//        else if (posx < tamanho/2) dx = -dx;
-//
-//        if (posy >= lugar.height - tamanho/2) dy = -dy;
-//        else if (posy < tamanho/2) dy = -dy;
-//    }
+    public void ajusta() {
+        if (posx >= processing.width - tamanho/2) dx = -dx;
+        else if (posx < tamanho/2) dx = -dx;
+
+        if (posy >= processing.height - tamanho/2) dy = -dy;
+        else if (posy < tamanho/2) dy = -dy;
+    }
 }
