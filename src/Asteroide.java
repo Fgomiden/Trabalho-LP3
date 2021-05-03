@@ -17,7 +17,7 @@ public class Asteroide  implements Animavel, Seguidor, Seguivel{
     }
 
     public void desenha() {
-        this.processing.fill(255);
+        this.processing.fill(121, 123, 125);
         this.processing.circle(posx, posy, tamanho);
     }
 
@@ -89,14 +89,14 @@ public class Asteroide  implements Animavel, Seguidor, Seguivel{
     public void move() {
         this.posx = this.posx + this.dx;
         this.posy = this.posy + this.dy;
-        ajusta();
+        //ajusta();
     }
 
-    public void ajusta() {
-        if (posx >= processing.width - tamanho/2) dx = -dx;
-        else if (posx < tamanho/2) dx = -dx;
-
-        if (posy >= processing.height - tamanho/2) dy = -dy;
-        else if (posy < tamanho/2) dy = -dy;
-    }
+//    public void ajusta() {
+//        if (posx >= processing.width - tamanho/2) dx = -dx;
+//        else if (posx < tamanho/2) dx = -dx;
+//
+//        if (posy >= processing.height - tamanho/2) dy = -dy;
+//        else if (posy < tamanho/2) dy = -dy;
+//    }
 }

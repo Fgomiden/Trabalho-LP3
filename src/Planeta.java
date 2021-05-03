@@ -13,7 +13,7 @@ public class Planeta implements Desenhavel, Animavel, Seguidor, Seguivel {
     }
     public void desenha() {
         this.processing.fill(6, 109, 199);
-        this.processing.ellipse(posx, posy, 50, 50);
+        this.processing.ellipse(posx, posy, 25, 25);
 //        this.processing.translate(this.processing.width/2, this.processing.height/2);
 //        this.processing.rotate(this.processing.radians(r));
 //        r += 1;

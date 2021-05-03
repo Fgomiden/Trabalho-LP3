@@ -5,15 +5,16 @@ public class Universo extends PApplet {
    private Seguidor seguidor;
    private Seguivel seguivel;
    private Planeta planeta;
+   private Sol sol;
    private Asteroide asteroide;
    private ArrayList<Asteroide> asteroides;
-   private int maxAsteroids = 20;
-    float r;
+   private int maxAsteroids = 10;
+   private float r;
 
     public void settings() {
         size(1500, 800);
 
-        asteroides = new ArrayList<Asteroide>(10);
+        asteroides = new ArrayList<Asteroide>();
     }
 
 
@@ -36,10 +37,7 @@ public class Universo extends PApplet {
             Asteroide asteroide = asteroides.get(i);
             circle(asteroide.pegaX(), asteroide.pegaY(),asteroide.pegaTamanho());
             asteroide.move();
-            if (asteroide.pegaX() >= 1000 - asteroide.pegaTamanho()/2) asteroide.setaDX(-asteroide.pegaDX());
-            else if (asteroide.pegaX() < asteroide.pegaTamanho()/2) asteroide.setaDX(-asteroide.pegaDX());
-            if (asteroide.pegaY() >= 1000 - asteroide.pegaTamanho()/2)  asteroide.setaDY(-asteroide.pegaDY());
-            else if (asteroide.pegaY() < asteroide.pegaTamanho()/2) asteroide.setaDY(-asteroide.pegaDY());
+            asteroide.setaDX(-asteroide.pegaDY());
         }
 
         //Posição do SOl na tela
@@ -60,7 +58,7 @@ public class Universo extends PApplet {
             //Rotação
             rotate(radians(r/3));
             //Cor
-            fill(255);
+            fill(121, 123, 125);
             //Formato
             ellipse(50,0 , 5, 5);
 
@@ -68,11 +66,12 @@ public class Universo extends PApplet {
         r += 1;
        loop();
 
-       if (asteroides.size() <= maxAsteroids){
-           Asteroide asteroide = new Asteroide(20, width - random(1500), height - random(800), this);
+       while (asteroides.size() <= maxAsteroids){
+           Asteroide asteroide = new Asteroide(10, width - random(500), height - 800, this);
 
-           asteroide.setaDX(random(0,5));
-           asteroide.setaDY(random(0,5));
+           asteroide.setaDX(random(2,5));
+           asteroide.setaDY(random(2,5));
+
            asteroides.add(asteroide);
        }
 
@@ -82,22 +81,19 @@ public class Universo extends PApplet {
     }
 
     public void mousePressed() {
-        Asteroide asteroide = new Asteroide(20, mouseX, mouseY, this);
-        asteroide.setaDX(random(-2,2));
-        asteroide.setaDY(random(-2,2));
-        asteroides.add(asteroide);
+        if (mouseButton == LEFT) {
+            Asteroide asteroide = new Asteroide(10, mouseX, mouseY, this);
+            asteroide.setaDX(random(5,10));
+            asteroide.setaDY(random(5,10));
+            asteroides.add(asteroide);
+            seguivel = sol ;
 
-//        if (mouseButton == LEFT) {
-//            if (random(-1,1) < 0) {
-//                seguivel = planeta;
-//            } else {
-//                seguidor = asteroide;
-//            }
-//
-//        } else if (mouseButton == RIGHT) {
-//            seguidor = bola;
-//
-//        }
+            seguidor = asteroide;
+
+        } else if (mouseButton == RIGHT) {
+            asteroides.remove(asteroide);
+
+        }
     }
 
     public static void main(String[] passedArgs) {
