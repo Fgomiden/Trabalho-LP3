@@ -1,43 +1,25 @@
 import processing.core.PApplet;
-
-public class Planeta implements Desenhavel, Animavel, Seguidor, Seguivel {
+//Classe Planeta com herança simples da interface Desenhavel
+public class Planeta implements Desenhavel {
+    //Atributos
     private float posx;
     private float posy;
-    //int r;
-    private PApplet processing;
+    private float tamX;
+    private float tamY;
+    public PApplet processing;
 
-    public Planeta( float posx, float posy, PApplet processing) {
+    //Construtor
+    public Planeta( float posx, float posy, float tamX, float tamY, PApplet processing) {
         this.posx = posx;
         this.posy = posy;
+        this.tamX = tamX;
+        this.tamY = tamY;
         this.processing = processing;
     }
+    //Função exibe a forma geométrica na tela
     public void desenha() {
-        this.processing.fill(6, 109, 199);
-        this.processing.ellipse(posx, posy, 25, 25);
-//        this.processing.translate(this.processing.width/2, this.processing.height/2);
-//        this.processing.rotate(this.processing.radians(r));
-//        r += 1;
-//        this.processing.loop();
+        this.processing.ellipse(posx, posy, tamX, tamY);
     }
 
-    @Override
-    public void move() {
-
-    }
-
-    @Override
-    public void segue() {
-
-    }
-
-    @Override
-    public void estabeleceAlvo(Seguivel alvo) {
-
-    }
-
-    @Override
-    public Posicao pegaPosicao() {
-        return null;
-    }
 }
 
